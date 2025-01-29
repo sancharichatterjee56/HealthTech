@@ -1,0 +1,225 @@
+/* Global Styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+img {
+    display: block;
+    max-width: 16%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Header Styles */
+.header_section {
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    padding: 20px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header_section .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+}
+
+.logo img {
+    height: 60px;
+    width: auto;
+    align-items:left;
+}
+
+nav.menu_text ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: Center;
+}
+
+nav.menu_text ul li {
+    margin-left: 20px;
+}
+
+nav.menu_text ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 12px;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    text-align: Center;
+}
+
+nav.menu_text ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Header Call-to-Action */
+.cta a {
+    background-color: #fff;
+    color: #2575fc;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.cta a:hover {
+    background-color: #2575fc;
+    color: #fff;
+}
+
+
+
+/* Banner Section */
+.banner_section {
+    background: linear-gradient(to right, #16a085, #27ae60);
+    padding: 100px 0;
+    color: white;
+    text-align: Center;
+}
+
+.banner_text {
+    padding: 50px;
+}
+
+.banner_img {
+    display: block;
+     margin-left: auto;
+    margin-right: auto;
+    max-width: 16%;
+   
+}
+
+/* Primary Heading */
+.primary_heading {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.subtitle_text {
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+/* About Us Section */
+.about_section {
+    padding: 80px 0;
+    background: linear-gradient(to right, #ecf0f1, #bdc3c7);
+    text-align: center
+}
+
+.about_text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.about_img {
+    display: block;
+    width: 16%;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Services Section */
+.services_section {
+    padding: 80px 0;
+     text-align: center;
+}
+
+.service_box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.service_box:hover {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px);
+}
+
+.service_box .icon_box {
+    font-size: 40px;
+    color: #e74c3c;
+    margin-bottom: 20px;
+}
+
+/* Contact Section */
+.contact_section {
+    background: linear-gradient(45deg, #3498db, #2ecc71);
+    color:black;
+    padding: 80px 0;
+    text-align: center
+}
+
+/* Footer Section */
+.footer_section {
+    padding: 60px 0;
+    text-align: center
+}
+
+.footer_heading {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.footer_links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer_links li {
+    margin-bottom: 10px;
+}
+
+.footer_links li a {
+    color: darkgreen;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer_links li a:hover {
+    color: blue;
+}
+
+/* Social Icons */
+.social_icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 15px;
+    text-align: center
+}
+
+.social_icons li {
+    display: inline-block;
+}
+
+.social_icons li a {
+    color: black;
+    font-size: 20px;
+    text-align:center;
+}
+
+.social_icons li a:hover {
+    color: blue;
+}
+
+
+

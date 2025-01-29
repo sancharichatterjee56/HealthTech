@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Record - E-Healthcare Advisor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .header_section {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            padding: 20px 0;
+            text-align: center;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #2575fc;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2575fc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1a61d6;
+        }
+
+        .record-box {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f0f8ff;
+            border: 1px solid #2575fc;
+            border-radius: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header_section">
+        <h1>E-Healthcare Advisor</h1>
+        <p>Health Record</p>
+        <li><a href="index.html">Home</a></li>
+    </header>
+
+    <!-- Health Record Form -->
+    <div class="container">
+        <h2>Record Your Health Information</h2>
+        <form id="healthRecordForm">
+            <label for="date">Date</label>
+            <input type="date" id="date" required>
+
+            <label for="symptoms">Symptoms</label>
+            <textarea id="symptoms" rows="4" required></textarea>
+
+            <label for="temperature">Body Temperature (°C)</label>
+            <input type="number" id="temperature" required>
+
+            <label for="bloodPressure">Blood Pressure (mmHg)</label>
+            <input type="text" id="bloodPressure" required>
+
+            <button type="submit">Save Record</button>
+        </form>
+
+        <div class="record-box" id="recordBox" style="display:none;">
+            <h3>Health Record Saved</h3>
+            <p id="recordDetails"></p>
+        </div>
+    </div>
+
+    <script>
+        const healthRecordForm = document.getElementById('healthRecordForm');
+        const recordBox = document.getElementById('recordBox');
+        const recordDetails = document.getElementById('recordDetails');
+
+        healthRecordForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // Get form data
+            const date = document.getElementById('date').value;
+            const symptoms = document.getElementById('symptoms').value;
+            const temperature = document.getElementById('temperature').value;
+            const bloodPressure = document.getElementById('bloodPressure').value;
+
+            // Simulate saving the health record and displaying it
+            recordDetails.innerHTML = `
+                <strong>Date:</strong> ${date}<br>
+                <strong>Symptoms:</strong> ${symptoms}<br>
+                <strong>Temperature:</strong> ${temperature}°C<br>
+                <strong>Blood Pressure:</strong> ${bloodPressure} mmHg
+            `;
+
+            recordBox.style.display = 'block';
+        });
+    </script>
+
+</body>
+</html>
