@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Health Advisor - Contact Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #EFF6FF, #FFFFFF);
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .header h1 {
+            color: #1E40AF;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            color: #4B5563;
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.5rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .submit-button:hover {
+            background-color: #1D4ED8;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .info-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-section h2 {
+            color: #1E40AF;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            background: #F8FAFC;
+            border-radius: 0.5rem;
+            transition: transform 0.2s;
+        }
+
+        .contact-method:hover {
+            transform: translateY(-2px);
+        }
+
+        .contact-method i {
+            font-size: 1.5rem;
+            color: #2563EB;
+        }
+
+        .contact-method .details {
+            flex: 1;
+        }
+
+        .contact-method .label {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-method .value {
+            color: #4B5563;
+            font-size: 0.875rem;
+        }
+
+        .office-locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .office {
+            padding: 1rem;
+            background: #F8FAFC;
+            border-radius: 0.5rem;
+        }
+
+        .office h3 {
+            color: #1E40AF;
+            margin-bottom: 0.5rem;
+        }
+
+        .office p {
+            color: #4B5563;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .success-message {
+            display: none;
+            background: #DEF7EC;
+            color: #03543F;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .success-message.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Contact Us</h1>
+            <p>Have questions or need assistance? We're here to help! Reach out to our team through any of the following channels.</p>
+        </div>
+
+        <div class="contact-grid">
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required placeholder="Enter your full name">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required placeholder="Enter your email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="technical">Technical Support</option>
+                            <option value="billing">Billing Question</option>
+                            <option value="partnership">Partnership Opportunity</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" required placeholder="How can we help you?"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Send Message</button>
+
+                    <div class="success-message" id="successMessage">
+                        Thank you for your message! We'll get back to you shortly.
+                    </div>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <div class="info-section">
+                    <h2>📞 Contact Methods</h2>
+                    <div class="contact-method">
+                        <i>📧</i>
+                        <div class="details">
+                            <div class="label">Email</div>
+                            <div class="value">support@ehealthtech.com</div>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i>📞</i>
+                        <div class="details">
+                            <div class="label">Phone</div>
+                            <div class="value">+91 2233445566</div>
+                        </div>
+                    </div>
+                    <div class="contact-method">
+                        <i>💬</i>
+                        <div class="details">
+                            <div class="label">Live Chat</div>
+                            <div class="value">Available 24/7</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>🏢 Office Locations</h2>
+                    <div class="office-locations">
+                        <div class="office">
+                            <h3>Main Office</h3>
+                            <p>12 EP Block<br>Salt Lake,kolkata</p>
+                        </div>
+                        <div class="office">
+                            <h3>Research Center</h3>
+                            <p>456 Innovation Drive<br>14 Lane,Gariahat<br>India</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        contactForm.addEventListener('submit'), (e) => {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            // Simulate form submission (in a real application, this would be an API call)
+            console.log('Form submission:', formData);
+
+            // Show success message
+            successMessage.classList.add('active');
+        }

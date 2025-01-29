@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tech - Login</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #EFF6FF, #FFFFFF);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            color: #1E40AF;
+            font-size: 1.875rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            color: #4B5563;
+        }
+
+        .tab-container {
+            display: flex;
+            background-color: #F3F4F6;
+            border-radius: 0.5rem;
+            padding: 0.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            background: none;
+            border-radius: 0.375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #4B5563;
+        }
+
+        .tab-button.active {
+            background-color: white;
+            color: #2563EB;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 1px solid #D1D5DB;
+            border-radius: 0.5rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .input-group input:focus {
+            border-color: #2563EB;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #9CA3AF;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .remember-me input[type="checkbox"] {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        .forgot-password {
+            color: #2563EB;
+            text-decoration: none;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #2563EB;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .login-button:hover {
+            background-color: #1D4ED8;
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #4B5563;
+        }
+
+        .signup-link a {
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .error-message {
+            color: #DC2626;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+        
+        .success-message {
+            color: #059669;
+            text-align: center;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="header">
+            <h1>E-Health Advisor</h1>
+            <p>Welcome back! Please login to continue.</p>
+        </div>
+
+        <div id="errorMessage" class="error-message"></div>
+        <div id="successMessage" class="success-message"></div>
+
+        <div class="tab-container">
+            <button class="tab-button active" data-type="patient">Patient</button>
+            <button class="tab-button" data-type="admin">Admin</button>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-group">
+                    <i>📧</i>
+                    <input type="email" id="email" required placeholder="Enter your email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <i>🔒</i>
+                    <input type="password" id="password" required placeholder="Enter your password">
+                </div>
+            </div>
+
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" id="remember">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="forgot-password" id="forgotPassword">Forgot password?</a>
+            </div>
+
+            <button type="submit" class="login-button">Sign in</button>
+        </form>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://xleyqfmaqovkbtrfzryg.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhsZXlxZm1hcW92a2J0cmZ6cnlnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjc0NDY0MzIsImV4cCI6MjA0MzAyMjQzMn0.tk-qdlJLyy4kLb6Fq32mvzto9bIryuf07n7SSzr9Oes';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const forgotPasswordLink = document.getElementById('forgotPassword');
+        let currentUserType = 'patient';
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.style.display = 'block';
+            successMessage.style.display = 'none';
+        }
+
+        function showSuccess(message) {
+            successMessage.textContent = message;
+            successMessage.style.display = 'block';
+            errorMessage.style.display = 'none';
+        }
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                currentUserType = button.dataset.type;
+            });
+        });
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember').checked;
+
+            try {
+
+                const { data: { user }, error } = await supabase.auth.signInWithPassword({
+                    email: email,
+                    password: password
+                });
+
+                if (error) {
+                    showError(error.message);
+                    return;
+                }
+
+                const { data: userData, error: userError } = await supabase
+                    .from('users')
+                    .select('*')
+                    .eq('id', user.id)
+                    .single();
+
+                if (userError) {
+                    showError('Error fetching user data');
+                    return;
+                }
+                if (userData.user_type !== currentUserType) {
+                    showError(`Invalid login. Please use the ${currentUserType} login tab.`);
+                    await supabase.auth.signOut();
+                    return;
+                }
+
+                showSuccess('Login successful! Redirecting...');
+
+                if (rememberMe) {
+                    localStorage.setItem('supabase.auth.token', JSON.stringify(user));
+                }
+
+                setTimeout(() => {
+                    window.location.href = `/${currentUserType}_dashboard.html`;
+                }, 1500);
+
+            } catch (error) {
+                showError('An unexpected error occurred. Please try again.');
+                console.error('Login error:', error);
+            }
+        });
+
+        forgotPasswordLink.addEventListener('click', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            if (!email) {
+                showError('Please enter your email address first');
+                return;
+            }
+
+            try {
+                const { error } = await supabase.auth.resetPasswordForEmail(email, {
+                    redirectTo: window.location.origin + '/reset-password.html',
+                });
+
+                if (error) {
+                    showError(error.message);
+                } else {
+                    showSuccess('Password reset email sent. Please check your inbox.');
+                }
+            } catch (error) {
+                showError('Failed to send reset password email');
+                console.error('Reset password error:', error);
+            }
+        });
+
+        window.addEventListener('load', async () => {
+            const { data: { session }, error } = await supabase.auth.getSession();
+            
+            if (session) {
+                const { data: userData } = await supabase
+                    .from('users')
+                    .select('user_type')
+                    .eq('id', session.user.id)
+                    .single();
+
+                if (userData) {
+                    window.location.href = `/${userData.user_type}_dashboard.html`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Health Advisor - About Us</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #EFF6FF, #FFFFFF);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .header h1 {
+            color: #1E40AF;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .header p {
+            color: #4B5563;
+            font-size: 1.125rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .section-title {
+            color: #1E40AF;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section-title i {
+            font-size: 1.75rem;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .mission-card {
+            background: #F8FAFC;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            transition: transform 0.2s;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .mission-card h3 {
+            color: #1E40AF;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .mission-card p {
+            color: #4B5563;
+            line-height: 1.6;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: #EFF6FF;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+        }
+
+        .stat-number {
+            color: #1E40AF;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #4B5563;
+            font-size: 1rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 1rem;
+            object-fit: cover;
+        }
+
+        .team-member h3 {
+            color: #1E40AF;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: #4B5563;
+            font-size: 0.875rem;
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 3rem;
+            padding: 2rem;
+            background: #EFF6FF;
+            border-radius: 0.75rem;
+        }
+
+        .contact-info h3 {
+            color: #1E40AF;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .contact-info p {
+            color: #4B5563;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info a {
+            color: #2563EB;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+
+            .mission-grid,
+            .stats-grid,
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>About E-Health Advisor</h1>
+            <p>Empowering individuals with AI-driven healthcare insights and personalized wellness recommendations</p>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <i>🎯</i>
+                Our Mission
+            </h2>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <h3>Accessible Healthcare</h3>
+                    <p>Making quality healthcare information accessible to everyone through advanced AI technology and expert medical knowledge.</p>
+                </div>
+                <div class="mission-card">
+                    <h3>Preventive Care</h3>
+                    <p>Empowering users to take control of their health through early detection and preventive care recommendations.</p>
+                </div>
+                <div class="mission-card">
+                    <h3>Innovation</h3>
+                    <p>Continuously improving our AI algorithms and expanding our knowledge base to provide more accurate and helpful health insights.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <i>📊</i>
+                Impact & Statistics
+            </h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">100K+</div>
+                    <div class="stat-label">Active Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Accuracy Rate</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Availability</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Health Conditions</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">
+                <i>👥</i>
+                Our Team
+            </h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="Screenshot 2024-11-10 211518.png" alt="Director">
+                    <h3>Abhigyan Kulavi</h3>
+                    <p>Medical Director</p>
+                </div>
+                <div class="team-member">
+                    <img src="Screenshot 2024-11-10 211518.png" alt="AI Lead">
+                    <h3>Souvik</h3>
+                    <p>AI Research Lead</p>
+                </div>
+                <div class="team-member">
+                    <img src="Screenshot 2024-11-10 211518.png" alt="Technical Lead">
+                    <h3>Prottus Manna</h3>
+                    <p>Technical Lead</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <h3>Get in Touch</h3>
+            <p>Have questions or feedback? We'd love to hear from you!</p>
+            <p>Email: <a href="mailto:contact@ehealttech.com">contact@ehealthadvisor.com</a></p>
+            <p>Phone: +91 2233445566</p>
+        </div>
+    </div>
+</body>
+</html>

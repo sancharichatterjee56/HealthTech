@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Disease Prediction</title>
+    <link rel="stylesheet" href="styles.css">
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(to bottom, #EFF6FF, #FFFFFF);
+    padding: 2rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1 {
+    color: #1E40AF;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.header p {
+    color: #4B5563;
+}
+
+.chat-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.symptoms-form {
+    margin-bottom: 2rem;
+}
+
+.symptom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.symptom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background: #F3F4F6;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.symptom-checkbox:hover {
+    background: #E5E7EB;
+}
+
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #D1D5DB;
+    border-radius: 0.5rem;
+    resize: vertical;
+    min-height: 100px;
+    margin-bottom: 1rem;
+}
+
+.analyze-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #2563EB;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.analyze-btn:hover {
+    background: #1D4ED8;
+}
+
+#results {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #E5E7EB;
+    display: none;
+}
+
+.result-card {
+    background: #F8FAFC;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+}
+
+.disease-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1E40AF;
+    margin-bottom: 1rem;
+}
+
+.confidence-bar {
+    height: 0.5rem;
+    background: #E5E7EB;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: #2563EB;
+    border-radius: 1rem;
+    transition: width 0.3s ease;
+}
+
+.recommendations {
+    background: #EFF6FF;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.disclaimer {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #FEF2F2;
+    border-radius: 0.5rem;
+    color: #991B1B;
+    font-size: 0.875rem;
+    text-align: center;
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>AI Disease Prediction</h1>
+            <p>Enter your symptoms for an AI-powered health assessment</p>
+        </header>
+
+        <div class="chat-container">
+            <div class="symptoms-form">
+                <div class="symptom-grid">
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptoms" value="fever"> Fever
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptoms" value="cough"> Cough
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptoms" value="fatigue"> Fatigue
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptoms" value="headache"> Headache
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptoms" value="sore-throat"> Sore Throat
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptoms" value="body-aches"> Body Aches
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptoms" value="shortness-breath"> Shortness of Breath
+                    </label>
+                    <label class="symptom-checkbox">
+                        <input type="checkbox" name="symptoms" value="nausea"> Nausea
+                    </label>
+                </div>
+
+                <textarea id="additional-symptoms" placeholder="Describe any additional symptoms or concerns..."></textarea>
+                
+                <button class="analyze-btn" onclick="DiagnosisSystem.analyze()">Analyze Symptoms</button>
+            </div>
+
+            <div id="results"></div>
+
+            <div class="disclaimer">
+                <p>This is an AI-powered prediction tool and should not be used as a substitute for professional medical advice. 
+                   Please consult with a healthcare provider for proper diagnosis and treatment.</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.15.0/dist/tf.min.js"></script>
+    <script src="js/symptomData.js"></script>
+    <script src="js/aiModel.js"></script>
+    <script src="js/diagnosisSystem.js"></script>
+</body>
+</html>
