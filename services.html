@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Health Advisor - Services</title>
+  <style>
+    .services-section {
+      background-color: #f5f5f5;
+      padding: 40px 20px;
+    }
+
+    .services-title {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .service-item {
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .service-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .service-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    .service-description {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .service-button {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .service-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <section class="services-section">
+    <h2 class="services-title">Our Key Features</h2>
+    
+    <div class="service-item" id="personalized-recommendations">
+      <div class="service-icon">🧠</div>
+      <h3 class="service-title">Personalized Recommendations</h3>
+      <p class="service-description">Our AI-powered advisor analyzes your information to provide personalized recommendations.</p>
+      <a href="chatbot.html" class="service-button">Try our AI Disease Prediction Chatbot</a>
+    </div>
+
+    <div class="service-item" id="virtual-consultations">
+      <div class="service-icon">🧑‍⚕️</div>
+      <h3 class="service-title">Medicine Recommendation</h3>
+      <p class="service-description">All your medicine needs in one place at Apollo Pharmacy.</p>
+      <a href="https://www.apollopharmacy.in/" class="service-button">Visit now</a>
+    </div>
+
+    <div class="service-item" id="wellness-tracking">
+      <div class="service-icon">📈</div>
+      <h3 class="service-title">Wellness Tracking</h3>
+      <p class="service-description">Monitor your progress and stay motivated.</p>
+      <a href="records.html" class="service-button">Health Records</a>
+    </div>
+  </section>
+
+  <script>w
+    const serviceItems = document.querySelectorAll('.service-item');
+
+    serviceItems.forEach((item) => {
+      item.addEventListener('click', () => {
+        const targetId = item.getAttribute('id');
+        const targetElement = document.getElementById(targetId);
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>

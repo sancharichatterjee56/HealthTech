@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health-Tech</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+
+        .nav {
+            background: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-links a {
+            color: #4b5563;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        .main {
+            min-height: 100vh;
+            background: linear-gradient(to bottom, #f0f7ff, white);
+        }
+
+        .hero {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #111827;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: #4b5563;
+            margin-bottom: 2rem;
+            max-width: 36rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            background: #2563eb;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn:hover {
+            background: #1d4ed8;
+        }
+
+        .features {
+            max-width: 1140px;
+            margin: 0 auto;
+            padding: 4rem 1rem;
+        }
+
+        .features h2 {
+            font-size: 1.875rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #111827;
+        }
+
+        .features-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: white;
+            border-radius: 0.75rem;
+            padding: 40px 20px;
+            min-height: 300px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.2s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            background: #dbeafe;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #4b5563;
+            line-height: 1.5;
+        }
+        .feature-card .btn {
+            margin-top: auto; 
+        }
+        .discussion-forum {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 20px;
+            min-height: 300px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .discussion-forum h3 {
+            color: #2563eb;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .forum-post {
+            margin-bottom: 15px;
+        }
+
+        .forum-post h4 {
+            font-size: 1.1rem;
+            color: #111827;
+            margin-bottom: 5px;
+        }
+
+        .forum-post p {
+            color: #4b5563;
+            line-height: 1.4;
+        }
+
+        .reply-button {
+            background: #2563eb;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+        }
+
+        .reply-button:hover {
+            background: #1d4ed8;
+        }
+
+        @media (max-width: 768px) {
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        } (Existing CSS styles...) */
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="logo">Health-Tech</div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="services.html">Services</a>
+                <a href="about.html">About</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main">
+        <section class="hero">
+            <h1>Elevate Your Health Potential</h1>
+            <p>Our E-Healthcare advisor provides personalized guidance and tools to help you achieve your wellness goals.</p>
+            <a href="login.html" class="btn service-button">Get Started</a>
+        </section>
+
+        <section class="features">
+            <h2>Key Features</h2>
+            <div class="features-container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Personalized Recommendations</h3>
+                        <p>Our AI-powered advisor analyzes your health data to provide tailored suggestions.</p>
+                        <a href="chatbot.html" class="btn service-button">Try our AI Disease Prediction Chatbot</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📹</div>
+                        <h3>Medicine Suggestion</h3>
+                        <p>All your medicine requirements in one click only at Apollo Pharmacy.</p>
+                        <a href="https://www.apollopharmacy.in/" target="_blank" class="btn">Visit apollopharmacy.in</a>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Health Records</h3>
+                        <p>Monitor your progress and stay motivated with our comprehensive tracking tools.</p>
+                        <a href="records.html" class="btn service-button">View Health Records</a>
+                    </div>
+                </div>
+
+               <div class="discussion-forum">
+                    <h3>Discussion Forum</h3>
+                    <div class="forum-post">
+                        <h4>Persistent Headache for a Week</h4>
+                        <p>I’ve been having persistent headaches for over a week now. Has anyone else experienced this?</p>
+                        <button class="reply-button">Reply</button>
+                    </div>
+                    <div class="forum-post">
+                        <h4>Frequent Coughing and Shortness of Breath</h4>
+                        <p>I’ve been experiencing frequent coughing and shortness of breath. Any advice is appreciated.</p>
+                        <button class="reply-button">Reply</button>
+                    </div>
+                    
+                    <a href="forum.html" class="btn service-button">Join the discussion forum</a>
+                </div>
+          </div>
+        </section>
+    </main>
+</body>
+<!-- Footer Section -->
+<footer style="background: white; color: #111827; padding: 3rem 1rem; font-size: 1rem;">
+    <div style="max-width: 1140px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem;">
+
+        <div style="flex: 1; min-width: 250px;">
+            <h3 style="font-size: 1.5rem; margin-bottom: 1rem; font-weight: bold;">Health-Tech</h3>
+            <p style="color: #4b5563; margin-bottom: 1.5rem; font-size: 1.1rem;">
+                Your trusted partner in achieving wellness goals. Access personalized health guidance, medication suggestions, and a supportive community.
+            </p>
+            <div style="display: flex; gap: 0.75rem; font-size: 1.5rem;">
+                <a href="#" style="color: #2563eb; text-decoration: none;">🌐</a>
+                <a href="#" style="color: #2563eb; text-decoration: none;">📘</a>
+                <a href="#" style="color: #2563eb; text-decoration: none;">🐦</a>
+                <a href="#" style="color: #2563eb; text-decoration: none;">📸</a>
+            </div>
+        </div>
+
+        <div style="flex: 1; min-width: 150px;">
+            <h4 style="font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold; color: #111827;">Quick Links</h4>
+            <ul style="list-style: none; padding: 0; color: #4b5563; font-size: 1.1rem;">
+                <li><a href="index.html" style="color: #2563eb; text-decoration: none;">Home</a></li>
+                <li><a href="services.html" style="color: #2563eb; text-decoration: none;">Services</a></li>
+                <li><a href="about.html" style="color: #2563eb; text-decoration: none;">About Us</a></li>
+                <li><a href="contact.html" style="color: #2563eb; text-decoration: none;">Contact</a></li>
+            </ul>
+        </div>
+        <div style="flex: 1; min-width: 250px;">
+            <h4 style="font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold; color: #111827;">Contact Us</h4>
+            <p style="color: #4b5563; font-size: 1.1rem;">12 EP Block,Salt Lake</p>
+            <p style="color: #4b5563; font-size: 1.1rem;">Email: contact@ehealthtech.com</p>
+            <p style="color: #4b5563; font-size: 1.1rem;">Phone: +91 2233445566</p>
+        </div>
+
+        <div style="flex: 1; min-width: 250px;">
+            <h4 style="font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold; color: #111827;">Subscribe to our Newsletter</h4>
+            <p style="color: #4b5563; margin-bottom: 1rem; font-size: 1.1rem;">Stay updated with the latest health tips and news.</p>
+            <form style="display: flex;">
+                <input type="email" placeholder="Your Email" required style="padding: 0.75rem; border: 1px solid #e5e7eb; border-radius: 5px 0 0 5px; outline: none; flex: 1;">
+                <button type="submit" style="background: #2563eb; border: none; padding: 0.75rem 1.25rem; color: white; font-weight: bold; border-radius: 0 5px 5px 0; cursor: pointer;">Subscribe</button>
+            </form>
+        </div>
+    </div>
+
+    <div style="border-top: 1px solid #e5e7eb; margin-top: 2rem; padding-top: 1.5rem; text-align: center;">
+        <div style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+            <p style="color: #6b7280; font-size: 1rem;">&copy; 2024 E-Health Advisor. All rights reserved.</p>
+            <div style="width: 100%; max-width: 600px; height: 200px; border-radius: 10px; overflow: hidden;">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.835434846293!2d-122.41941548468166!3d37.774929279758135!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064c2b7f4d3%3A0x5a0f6b8e3cb96ec2!2sHealth%20City!5e0!3m2!1sen!2sus!4v1616464636658!5m2!1sen!2sus" 
+                    width="100%" 
+                    height="100%" 
+                    style="border: 0;" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+ </div>
+</footer>
+</html>

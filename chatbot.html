@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Disease Prediction</title>
+    <style>
+        .chat-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #2563eb;
+            color: white;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .messages {
+            height: 400px;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+
+        .message {
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .message.user {
+            flex-direction: row-reverse;
+        }
+
+        .message-content {
+            max-width: 80%;
+            padding: 0.75rem;
+            border-radius: 8px;
+        }
+
+        .bot .message-content {
+            background: #eff6ff;
+        }
+
+        .user .message-content {
+            background: #f0fdf4;
+        }
+
+        .input-area {
+            padding: 1rem;
+            border-top: 1px solid #e5e7eb;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .input-area input {
+            flex: 1;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+        }
+
+        .input-area button {
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .input-area button:hover {
+            background: #1d4ed8;
+        }
+
+        .disclaimer {
+            max-width: 800px;
+            margin: 1rem auto;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.875rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+            <h1>Health-Tech Assistant</h1>
+        </div>
+        <div class="messages" id="messages"></div>
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Describe your symptoms...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+    <div class="disclaimer">
+        ⚠️ This is a demo application and should not be used for actual medical diagnosis.
+        Always consult with qualified healthcare professionals for medical advice.
+    </div>
+
+    <script>
+        const diseases = [
+            {
+                name: "Common Cold",
+                symptoms: ["runny nose", "sore throat", "cough", "congestion", "mild fever", "sneezing"],
+                description: "A viral infection of the upper respiratory tract."
+            },
+            {
+                name: "Influenza",
+                symptoms: ["high fever", "body aches", "fatigue", "headache", "dry cough", "chills"],
+                description: "A viral infection that attacks your respiratory system."
+            },
+            {
+                name: "Migraine",
+                symptoms: ["severe headache", "nausea", "sensitivity to light", "sensitivity to sound", "visual disturbances"],
+                description: "A headache disorder characterized by recurrent headaches."
+            },
+            {
+                name: "Food Poisoning",
+                symptoms: ["nausea", "vomiting", "diarrhea", "stomach cramps", "fever", "weakness"],
+                description: "Illness caused by eating contaminated food."
+            },
+            {
+                name: "Allergic Rhinitis",
+                symptoms: ["sneezing", "runny nose", "itchy eyes", "congestion", "watery eyes"],
+                description: "Inflammation of the nasal passages caused by allergies."
+            },
+             {
+                  name: "Appendicitis",
+                  symptoms: ["abdominal pain", "fever", "nausea", "loss of appetite", "pain near belly button", "pain in lower right abdomen", "vomiting", "constipation", "diarrhea", "inability to pass gas"],
+                  description: "Inflammation of the appendix, requiring immediate medical attention."
+              },
+              {
+                  name: "Gastroenteritis",
+                  symptoms: ["stomach pain", "abdominal cramps", "fever", "nausea", "vomiting", "watery diarrhea", "muscle aches", "headache", "loss of appetite", "dehydration"],
+                  description: "Inflammation of the digestive system, often caused by viral or bacterial infection."
+              },
+
+              {
+                  name: "Cholecystitis",
+                  symptoms: ["intense abdominal pain", "fever", "nausea", "vomiting", "pain after eating fatty foods", "jaundice", "abdominal tenderness", "bloating"],
+                  description: "Inflammation of the gallbladder often due to gallstones, requiring timely treatment."
+              },
+              {
+                  name: "Liver Cirrhosis",
+                  symptoms: ["fatigue", "weakness", "easy bruising", "itchy skin", "jaundice", "ascites", "swelling in legs", "loss of appetite", "weight loss"],
+                  description: "Chronic liver damage leading to scarring and loss of liver function."
+              },
+              {
+                  name: "Multiple Sclerosis",
+                  symptoms: ["numbness", "tingling", "vision loss", "fatigue", "weakness", "difficulty walking", "muscle stiffness", "dizziness", "bladder problems"],
+                  description: "An autoimmune disease affecting the central nervous system, impacting mobility and other functions."
+              },
+              {
+                  name: "Systemic Lupus Erythematosus (SLE)",
+                  symptoms: ["fatigue", "joint pain", "rash", "fever", "mouth sores", "hair loss", "sensitivity to sunlight", "shortness of breath", "chest pain"],
+                  description: "A chronic autoimmune disease that can affect multiple organs, including skin and joints."
+              },
+              {
+                  name: "Chronic Obstructive Pulmonary Disease (COPD)",
+                  symptoms: ["shortness of breath", "chronic cough", "frequent respiratory infections", "fatigue", "wheezing", "chest tightness"],
+                  description: "A group of lung diseases causing airflow blockage and breathing issues."
+              },
+              {
+                  name: "Rheumatoid Arthritis",
+                  symptoms: ["joint pain", "stiffness", "swelling", "fatigue", "fever", "weight loss", "reduced mobility"],
+                  description: "An autoimmune disorder that primarily affects joints, causing inflammation and pain."
+              },
+              {
+                  name: "Parkinson's Disease",
+                  symptoms: ["tremors", "muscle stiffness", "slowed movement", "balance problems", "difficulty with coordination", "speech changes"],
+                  description: "A neurological disorder that affects movement, leading to tremors and balance issues."
+              },
+              {
+                  name: "Leukemia",
+                  symptoms: ["fever", "fatigue", "frequent infections", "easy bleeding", "weight loss", "bone pain", "swollen lymph nodes"],
+                  description: "A cancer of blood-forming tissues, affecting white blood cell production."
+              },
+              {
+                  name: "Alzheimer's Disease",
+                  symptoms: ["memory loss", "difficulty in thinking", "disorientation", "mood swings", "language problems", "difficulty performing daily tasks"],
+                  description: "A progressive neurological disorder that leads to memory loss and cognitive decline."
+              },
+              {
+                  name: "Chronic Heart Failure",
+                  symptoms: ["shortness of breath", "fatigue", "swollen legs", "rapid heartbeat", "persistent cough", "loss of appetite", "fluid retention"],
+                  description: "A condition where the heart cannot pump blood efficiently, leading to symptoms of fatigue and fluid build-up."
+              },
+              {
+                  name: "Celiac Disease",
+                  symptoms: ["diarrhea", "bloating", "abdominal pain", "fatigue", "weight loss", "iron deficiency anemia", "skin rash"],
+                  description: "An autoimmune disorder where ingestion of gluten leads to damage in the small intestine."
+              },
+              {
+                  name: "Lupus Nephritis",
+                  symptoms: ["blood in urine", "swelling in legs and ankles", "high blood pressure", "joint pain", "fever", "rash", "fatigue"],
+                  description: "An inflammation of the kidneys caused by systemic lupus erythematosus, an autoimmune disease."
+              },
+              {
+                  name: "Hepatitis B",
+                  symptoms: ["yellowing of skin", "abdominal pain", "dark urine", "joint pain", "loss of appetite", "nausea", "fever"],
+                  description: "A viral infection that attacks the liver and can cause both acute and chronic liver diseases."
+              },
+              {
+                  name: "Amyotrophic Lateral Sclerosis (ALS)",
+                  symptoms: ["muscle weakness", "difficulty speaking", "difficulty swallowing", "muscle cramps", "poor coordination", "difficulty breathing"],
+                  description: "A progressive neurological disease that affects nerve cells controlling voluntary muscles."
+              },
+              {
+                  name: "Lyme Disease",
+                  symptoms: ["fever", "headache", "fatigue", "skin rash", "joint pain", "heart palpitations", "facial paralysis"],
+                  description: "A tick-borne bacterial infection causing a range of symptoms, often with a characteristic bull's-eye rash."
+              },
+              {
+                  name: "Huntington's Disease",
+                  symptoms: ["involuntary movements", "impaired coordination", "cognitive decline", "personality changes", "difficulty in swallowing", "depression"],
+                  description: "An inherited condition where nerve cells in the brain break down over time, affecting movement and cognition."
+              },
+              {
+                  name: "Osteoporosis",
+                  symptoms: ["back pain", "loss of height over time", "stooped posture", "bone fractures", "joint pain", "muscle weakness"],
+                  description: "A condition where bones become weak and brittle, making them prone to fractures."
+              },
+              {
+                  name: "Cystic Fibrosis",
+                  symptoms: ["persistent cough", "frequent lung infections", "wheezing", "poor growth", "weight loss", "salty-tasting skin"],
+                  description: "A genetic disorder affecting the lungs and digestive system, leading to thick mucus build-up in organs."
+              },
+              {
+                  name: "Chronic Fatigue Syndrome",
+                  symptoms: ["extreme fatigue", "muscle pain", "joint pain", "sleep disturbances", "difficulty concentrating", "memory problems"],
+                  description: "A complex disorder characterized by persistent, unexplained fatigue that doesn’t improve with rest."
+              },
+              {
+                  name: "Guillain-Barré Syndrome",
+                  symptoms: ["muscle weakness", "numbness", "tingling", "loss of reflexes", "difficulty walking", "difficulty breathing"],
+                  description: "A rare autoimmune disorder where the body's immune system attacks nerves, leading to muscle weakness and paralysis."
+              },
+              {
+                  name: "Endometriosis",
+                  symptoms: ["severe menstrual cramps", "chronic pelvic pain", "painful intercourse", "infertility", "fatigue", "digestive issues"],
+                  description: "A disorder where tissue similar to the lining inside the uterus grows outside it, causing pain and potential fertility issues."
+              },
+              {
+                  name: "Epilepsy",
+                  symptoms: ["recurrent seizures", "confusion", "loss of consciousness", "staring spells", "muscle spasms", "anxiety"],
+                  description: "A neurological disorder marked by sudden, recurrent episodes of sensory disturbance or convulsions due to abnormal electrical activity in the brain."
+              },
+              {
+                  name: "Crohn's Disease",
+                  symptoms: ["abdominal pain", "diarrhea", "weight loss", "fatigue", "fever", "mouth sores", "reduced appetite"],
+                  description: "A type of inflammatory bowel disease that causes chronic inflammation of the digestive tract."
+              },
+               {
+                  name: "Myocardial Infarction (Heart Attack)",
+                  symptoms: ["chest pain", "shortness of breath", "nausea", "sweating", "dizziness", "pain radiating to arm or jaw", "fatigue", "anxiety"],
+                  description: "A medical emergency where blood flow to the heart is blocked, causing tissue damage."
+              },
+              {
+                  name: "Chronic Liver Disease",
+                  symptoms: ["jaundice", "swelling in legs and abdomen", "easy bruising", "fatigue", "weight loss", "itchy skin", "confusion"],
+                  description: "Progressive liver damage from causes like hepatitis, fatty liver, or alcohol consumption, leading to liver failure over time."
+              },
+              {
+                  name: "Pulmonary Embolism",
+                  symptoms: ["sudden shortness of breath", "chest pain", "cough", "rapid heartbeat", "lightheadedness", "leg pain", "swelling in leg"],
+                  description: "A blockage in the pulmonary arteries of the lungs, often caused by blood clots."
+              },
+              {
+                  name: "Aortic Aneurysm",
+                  symptoms: ["severe chest or abdominal pain", "back pain", "pulsing near the navel", "dizziness", "nausea", "sweating", "shortness of breath"],
+                  description: "A dangerous swelling of the aorta, which can rupture if not treated urgently."
+              },
+              {
+                  name: "Sickle Cell Anemia",
+                  symptoms: ["anemia", "episodes of pain", "swelling in hands and feet", "frequent infections", "delayed growth", "vision problems"],
+                  description: "A genetic blood disorder that causes red blood cells to form an abnormal crescent shape, affecting oxygen flow."
+              },
+              {
+                  name: "Lymphoma",
+                  symptoms: ["swollen lymph nodes", "fever", "night sweats", "unexplained weight loss", "fatigue", "itchy skin", "loss of appetite"],
+                  description: "A type of blood cancer that begins in lymphocytes, affecting the immune system."
+              },
+              {
+                  name: "Polycystic Ovary Syndrome (PCOS)",
+                  symptoms: ["irregular periods", "excess hair growth", "acne", "weight gain", "hair thinning", "infertility", "dark patches on skin"],
+                  description: "A hormonal disorder common among women of reproductive age, often leading to ovarian cysts."
+              },
+              {
+                  name: "Meningitis",
+                  symptoms: ["sudden high fever", "stiff neck", "severe headache", "sensitivity to light", "nausea", "vomiting", "seizures", "confusion"],
+                  description: "An infection causing inflammation of the brain and spinal cord membranes, potentially life-threatening if untreated."
+              },
+              {
+                  name: "Thalassemia",
+                  symptoms: ["fatigue", "weakness", "pale skin", "slow growth in children", "swelling in abdomen", "dark urine"],
+                  description: "A genetic blood disorder resulting in less hemoglobin and fewer red blood cells than normal, causing anemia."
+              },
+              {
+                  name: "Hypothyroidism",
+                  symptoms: ["fatigue", "weight gain", "cold intolerance", "dry skin", "muscle weakness", "depression", "constipation", "hair thinning"],
+                  description: "A condition where the thyroid gland doesn’t produce enough hormones, slowing down body metabolism."
+              },
+              {
+                  name: "Hyperthyroidism",
+                  symptoms: ["weight loss", "rapid heartbeat", "increased appetite", "nervousness", "sweating", "tremors", "sleep problems", "enlarged thyroid"],
+                  description: "An overactive thyroid condition leading to accelerated body metabolism, causing various symptoms."
+              },
+              {
+                  name: "Addison's Disease",
+                  symptoms: ["fatigue", "weight loss", "low blood pressure", "darkening of skin", "salt craving", "nausea", "abdominal pain"],
+                  description: "A disorder where the adrenal glands don’t produce enough hormones, affecting metabolism and stress response."
+              },
+              {
+                  name: "Multiple Myeloma",
+                  symptoms: ["bone pain", "nausea", "constipation", "loss of appetite", "frequent infections", "fatigue", "anemia"],
+                  description: "A cancer of plasma cells in the bone marrow, causing symptoms in bones, blood, and immune system."
+              },
+              {
+                  name: "Pulmonary Fibrosis",
+                  symptoms: ["shortness of breath", "dry cough", "fatigue", "unexplained weight loss", "aching muscles", "clubbing of fingers"],
+                  description: "A lung disease that occurs when lung tissue becomes damaged and scarred, making it hard to breathe."
+              },
+              {
+                  name: "Psoriatic Arthritis",
+                  symptoms: ["joint pain", "stiffness", "swelling", "fatigue", "nail changes", "scaly skin patches", "limited joint range of motion"],
+                  description: "An inflammatory arthritis associated with psoriasis, causing joint pain and skin symptoms."
+              }
+                    
+              
+            
+        ];
+
+        window.onload = function() {
+            addMessage("Hello! I'm your health-tech assistant. Please describe your symptoms, and I'll try to help identify possible conditions. Remember, this is just a preliminary assessment and should not replace professional medical advice.", true);
+        };
+
+        function predictDisease(userSymptoms) {
+            const userSymptomsList = userSymptoms.toLowerCase().split(/[,.]/).map(s => s.trim());
+            
+            const predictions = diseases.map(disease => {
+                const matchedSymptoms = disease.symptoms.filter(symptom =>
+                    userSymptomsList.some(userSymptom => 
+                        userSymptom.includes(symptom) || symptom.includes(userSymptom)
+                    )
+                );
+
+                const accuracy = (matchedSymptoms.length / disease.symptoms.length) * 100;
+                return { disease, accuracy };
+            });
+
+            const sortedPredictions = predictions
+                .filter(p => p.accuracy > 0)
+                .sort((a, b) => b.accuracy - a.accuracy);
+
+            if (sortedPredictions.length === 0) {
+                return "I couldn't identify any specific conditions based on the symptoms you described. Please provide more details or consult a healthcare professional.";
+            }
+
+            const topPrediction = sortedPredictions[0];
+            const predictionsText = sortedPredictions
+                .map(({ disease, accuracy }) => 
+                    `${disease.name} (${accuracy.toFixed(1)}% confidence)\n${disease.description}`
+                )
+                .join('\n\n');
+
+            return `Based on your symptoms, I predict:\n\n${predictionsText}\n\n${
+                topPrediction.accuracy < 90 
+                    ? "⚠️ Since the accuracy is below 90%, it's strongly recommended to consult a healthcare professional for a proper diagnosis."
+                    : "While this prediction has high accuracy, it's always good to consult with a healthcare professional for confirmation."
+            }`;
+        }
+
+        function addMessage(text, isBot) {
+            const messagesDiv = document.getElementById('messages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isBot ? 'bot' : 'user'}`;
+            
+            const contentDiv = document.createElement('div');
+            contentDiv.className = 'message-content';
+            contentDiv.innerText = text;
+            
+            messageDiv.appendChild(contentDiv);
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('userInput');
+            const message = input.value.trim();
+            
+            if (message) {
+                addMessage(message, false);
+                const response = predictDisease(message);
+                addMessage(response, true);
+                input.value = '';
+            }
+        }
+
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
